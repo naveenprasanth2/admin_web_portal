@@ -41,13 +41,12 @@ class _BlockedSellerScreenState extends State<BlockedSellerScreen> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.purpleAccent),
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.purpleAccent),
                   child: const Text("Cancel")),
               ElevatedButton(
                   onPressed: () {
-                    Map<String, dynamic> sellerDataMap = {
-                      "status": "approved"
-                    };
+                    Map<String, dynamic> sellerDataMap = {"status": "approved"};
                     firebaseFirestore
                         .collection("sellers")
                         .doc(sellerDocumentId)
@@ -61,7 +60,8 @@ class _BlockedSellerScreenState extends State<BlockedSellerScreen> {
                           context, "Activated successfully", Colors.green);
                     });
                   },
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.purpleAccent),
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.purpleAccent),
                   child: const Text("Proceed")),
             ],
           );
@@ -132,26 +132,58 @@ class _BlockedSellerScreenState extends State<BlockedSellerScreen> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        showDialogBox(allBlockedSellers!.docs[index].id);
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 18.0, bottom: 8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset("assets/activate.png", width: 56),
-                            const SizedBox(
-                              width: 10,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            showDialogBox(allBlockedSellers!.docs[index].id);
+                          },
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.only(top: 18.0, bottom: 8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset("assets/activate.png", width: 56),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                const Text(
+                                  "Activate Now",
+                                  style: TextStyle(color: Colors.redAccent),
+                                ),
+                              ],
                             ),
-                            const Text(
-                              "Activate Now",
-                              style: TextStyle(color: Colors.redAccent),
-                            ),
-                          ],
+                          ),
                         ),
-                      ),
+                        GestureDetector(
+                          onTap: () {
+                            showReusableSnackBar(
+                                context,
+                                "TOTAL EARNINGS : ₹ ${allBlockedSellers!.docs[index].get("earnings")}",
+                                Colors.red);
+                          },
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.only(top: 18.0, bottom: 8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset("assets/earnings.png", width: 56),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  "₹ ${allBlockedSellers!.docs[index].get("earnings")}",
+                                  style:
+                                      const TextStyle(color: Colors.redAccent),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
                     )
                   ],
                 ),

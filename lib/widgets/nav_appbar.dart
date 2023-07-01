@@ -1,5 +1,7 @@
 import 'package:admin_web_portal/authentication/login_screen.dart';
 import 'package:admin_web_portal/homeScreen/home_screen.dart';
+import 'package:admin_web_portal/sellers/sellers_pie_chart_screen.dart';
+import 'package:admin_web_portal/users/sellers_pie_chart_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -72,7 +74,12 @@ class _NavAppBarState extends State<NavAppBar> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (e) => const SellersPieChartScreen()));
+                  },
                   child: const Text(
                     "Sellers PieChart",
                     style: TextStyle(
@@ -87,7 +94,12 @@ class _NavAppBarState extends State<NavAppBar> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (e) => const UsersPieChartScreen()));
+                  },
                   child: const Text(
                     "Users PieChart",
                     style: TextStyle(

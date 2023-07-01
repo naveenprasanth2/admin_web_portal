@@ -132,26 +132,57 @@ class _VerifiedSellerScreenState extends State<VerifiedSellerScreen> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        showDialogBox(allApprovedSellers!.docs[index].id);
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 18.0, bottom: 8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset("assets/block.png", width: 56),
-                            const SizedBox(
-                              width: 10,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            showDialogBox(allApprovedSellers!.docs[index].id);
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 18.0, bottom: 8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset("assets/block.png", width: 56),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                const Text(
+                                  "Block Now",
+                                  style: TextStyle(color: Colors.redAccent),
+                                ),
+                              ],
                             ),
-                            const Text(
-                              "Block Now",
-                              style: TextStyle(color: Colors.redAccent),
-                            ),
-                          ],
+                          ),
                         ),
-                      ),
+                        GestureDetector(
+                          onTap: () {
+                            showReusableSnackBar(
+                                context,
+                                "TOTAL EARNINGS : ₹ ${allApprovedSellers!.docs[index].get("earnings")}",
+                                Colors.red);
+                          },
+                          child: Padding(
+                            padding:
+                            const EdgeInsets.only(top: 18.0, bottom: 8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset("assets/earnings.png", width: 56),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  "₹ ${allApprovedSellers!.docs[index].get("earnings")}",
+                                  style:
+                                  const TextStyle(color: Colors.redAccent),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
                     )
                   ],
                 ),
