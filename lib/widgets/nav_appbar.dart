@@ -1,4 +1,9 @@
+import 'package:admin_web_portal/authentication/login_screen.dart';
 import 'package:admin_web_portal/homeScreen/home_screen.dart';
+import 'package:admin_web_portal/sellers/sellers_pie_chart_screen.dart';
+import 'package:admin_web_portal/users/sellers_pie_chart_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class NavAppBar extends StatefulWidget implements PreferredSizeWidget {
@@ -18,16 +23,19 @@ class NavAppBar extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _NavAppBarState extends State<NavAppBar> {
+  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+
   @override
   Widget build(BuildContext context) {
     return AppBar(
       title: GestureDetector(
         onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (e)=> const HomeScreen()));
+          Navigator.push(
+              context, MaterialPageRoute(builder: (e) => const HomeScreen()));
         },
-        child: const Text(
-          "iShop",
-          style: TextStyle(
+        child: Text(
+          widget.title!,
+          style: const TextStyle(
             fontSize: 26,
             letterSpacing: 4,
             fontWeight: FontWeight.bold,
@@ -49,7 +57,8 @@ class _NavAppBarState extends State<NavAppBar> {
               padding: const EdgeInsets.all(8.0),
               child: TextButton(
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (e)=> const HomeScreen()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (e) => const HomeScreen()));
                   },
                   child: const Text(
                     "Home",
@@ -65,7 +74,12 @@ class _NavAppBarState extends State<NavAppBar> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (e) => const SellersPieChartScreen()));
+                  },
                   child: const Text(
                     "Sellers PieChart",
                     style: TextStyle(
@@ -80,7 +94,12 @@ class _NavAppBarState extends State<NavAppBar> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (e) => const UsersPieChartScreen()));
+                  },
                   child: const Text(
                     "Users PieChart",
                     style: TextStyle(
@@ -95,7 +114,12 @@ class _NavAppBarState extends State<NavAppBar> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    firebaseAuth.signOut();
+                    Navigator.popUntil(context, (route) => route.isFirst);
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (e) => const LoginScreen()));
+                  },
                   child: const Text(
                     "Logout",
                     style: TextStyle(
@@ -106,6 +130,7 @@ class _NavAppBarState extends State<NavAppBar> {
           ],
         ),
       ],
+      automaticallyImplyLeading: false,
     );
   }
 }
