@@ -1,8 +1,13 @@
 import 'dart:async';
 
+import 'package:admin_web_portal/sellers/blocked_sellers_screen.dart';
+import 'package:admin_web_portal/sellers/verified_sellers_screen.dart';
+import 'package:admin_web_portal/users/verified_users_screen.dart';
 import 'package:admin_web_portal/widgets/nav_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
+import '../users/blocked_users_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -45,7 +50,9 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      appBar: NavAppBar(),
+      appBar: NavAppBar(
+        title: "iShop",
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -67,7 +74,12 @@ class _HomeScreenState extends State<HomeScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (e) => const VerifiedUserScreen()));
+                    },
                     child: Image.asset(
                       "assets/verified_users.png",
                       width: 200,
@@ -76,19 +88,31 @@ class _HomeScreenState extends State<HomeScreen> {
                   width: 200,
                 ),
                 GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (e) => const BlockedUserScreen()));
+                    },
                     child: Image.asset(
                       "assets/blocked_users.png",
                       width: 200,
                     )),
               ],
             ),
-            const SizedBox(height: 20,),
+            const SizedBox(
+              height: 20,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (e) => const VerifiedSellerScreen()));
+                    },
                     child: Image.asset(
                       "assets/verified_seller.png",
                       width: 200,
@@ -97,7 +121,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   width: 200,
                 ),
                 GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (e) => const BlockedSellerScreen()));
+                    },
                     child: Image.asset(
                       "assets/blocked_seller.png",
                       width: 200,
