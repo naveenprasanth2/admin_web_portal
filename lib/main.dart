@@ -5,7 +5,16 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 Future<void> main() async {
-  await Firebase.initializeApp();
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    // Replace with actual values
+    options: const FirebaseOptions(
+      apiKey: "AIzaSyAnRH77UbtdjUJdZtkIjOUjbwyvLSOGklM",     // take these values from your index.html.
+      appId: "1:1097011694914:web:9b6204a49ab1b6424cccdb",        //code which you pasted from firebase.
+      messagingSenderId: "1097011694914",
+      projectId: "clone-c3dbe",
+    ),
+  );
   runApp(const MyApp());
 }
 
