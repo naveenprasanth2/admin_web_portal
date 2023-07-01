@@ -8,6 +8,14 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  String email = "";
+  String password = "";
+
+  allowAdminToLogin(){
+    if(email.isEmpty || password.isEmpty){
+      
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +30,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: [
                   Image.asset("assets/admin.png"),
                   TextField(
-                    onChanged: (value) {},
+                    onChanged: (value) {
+                      email = value;
+                    },
                     style: const TextStyle(fontSize: 16, color: Colors.white),
                     decoration: const InputDecoration(
                         enabledBorder: OutlineInputBorder(
@@ -44,7 +54,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 10,
                   ),
                   TextField(
-                    onChanged: (value) {},
+                    onChanged: (value) {
+                      password = value;
+                    },
                     obscureText: true,
                     style: const TextStyle(fontSize: 16, color: Colors.white),
                     decoration: const InputDecoration(
@@ -69,7 +81,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   Padding(
                     padding: const EdgeInsets.all(8),
                     child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          allowAdminToLogin();
+                        },
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 20),
                           backgroundColor: Colors.deepPurpleAccent
